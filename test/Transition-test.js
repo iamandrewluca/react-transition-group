@@ -199,6 +199,33 @@ describe('Transition', () => {
     findDOMNodeSpy.mockRestore()
   })
 
+  it('should warn when `Transition` static constant are used', () => {
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation()
+    let lastCallArgument = '';
+
+    expect(Transition.ENTERED).toEqual(ENTERED)
+    lastCallArgument = consoleSpy.mock.calls[consoleSpy.mock.calls.length - 1][0]
+    expect(lastCallArgument).toContain('react-transition-group: Transition.ENTERED')
+
+    expect(Transition.ENTERING).toEqual(ENTERING)
+    lastCallArgument = consoleSpy.mock.calls[consoleSpy.mock.calls.length - 1][0]
+    expect(lastCallArgument).toContain('react-transition-group: Transition.ENTERING')
+
+    expect(Transition.EXITED).toEqual(EXITED)
+    lastCallArgument = consoleSpy.mock.calls[consoleSpy.mock.calls.length - 1][0]
+    expect(lastCallArgument).toContain('react-transition-group: Transition.EXITED')
+
+    expect(Transition.EXITING).toEqual(EXITING)
+    lastCallArgument = consoleSpy.mock.calls[consoleSpy.mock.calls.length - 1][0]
+    expect(lastCallArgument).toContain('react-transition-group: Transition.EXITING')
+
+    expect(Transition.UNMOUNTED).toEqual(UNMOUNTED)
+    lastCallArgument = consoleSpy.mock.calls[consoleSpy.mock.calls.length - 1][0]
+    expect(lastCallArgument).toContain('react-transition-group: Transition.UNMOUNTED')
+
+    consoleSpy.mockRestore()
+  })
+
   describe('appearing timeout', () => {
     it('should use enter timeout if appear not set', done => {
       let calledBeforeEntered = false

@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import config from './config'
 import { timeoutsShape } from './utils/PropTypes'
 import TransitionGroupContext from './TransitionGroupContext'
+import { warningOnce } from './utils/warn-once'
 
 export const UNMOUNTED = 'unmounted'
 export const EXITED = 'exited'
@@ -376,6 +377,47 @@ class Transition extends React.Component {
       </TransitionGroupContext.Provider>
     )
   }
+
+  static get UNMOUNTED() {
+    warningOnce(
+      false,
+      'Transition.UNMOUNTED is deprecated please import it directly' +
+      '\nimport { UNMOUNTED } from \'react-transition-group\''
+    )
+    return UNMOUNTED
+  }
+  static get EXITED() {
+    warningOnce(
+      false,
+      'Transition.EXITED is deprecated please import it directly' +
+      '\nimport { EXITED } from \'react-transition-group\''
+    )
+    return EXITED
+  }
+  static get ENTERING() {
+    warningOnce(
+      false,
+      'Transition.ENTERING is deprecated please import it directly' +
+      '\nimport { ENTERING } from \'react-transition-group\''
+    )
+    return ENTERING
+  }
+  static get ENTERED() {
+    warningOnce(
+      false,
+      'Transition.ENTERED is deprecated please import it directly' +
+      '\nimport { ENTERED } from \'react-transition-group\''
+    )
+    return ENTERED
+  }
+  static get EXITING() {
+    warningOnce(
+      false,
+      'Transition.EXITING is deprecated please import it directly' +
+      '\nimport { EXITING } from \'react-transition-group\''
+    )
+    return EXITING
+  }
 }
 
 Transition.propTypes = {
@@ -582,11 +624,5 @@ Transition.defaultProps = {
   onExiting: noop,
   onExited: noop,
 }
-
-Transition.UNMOUNTED = UNMOUNTED
-Transition.EXITED = EXITED
-Transition.ENTERING = ENTERING
-Transition.ENTERED = ENTERED
-Transition.EXITING = EXITING
 
 export default Transition
